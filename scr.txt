@@ -1,0 +1,13 @@
+With temp1 as (
+select * from dealertrack where archive 20190430
+and dealer_province not in("yukon")
+and substring (dealer_postalcode,1,1) not in ("M")
+and interestrate >= 11.90
+and subvented = "No" )
+
+
+
+select laststatus,dealername count(*) as cnt from temp1
+and laststatus = "booked" 
+group by laststatus, dealername
+having cnt >= 40
